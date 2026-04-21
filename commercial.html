@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Commercial Performance Analysis — Ash Karnik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Ash Karnik ↗ Analytics</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../projects.html">Projects</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="project-detail-header">
+  <a href="../projects.html" class="back-link">← Back to Projects</a>
+  <div style="font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem;">Project 05 · Tableau · Excel · Python</div>
+  <h1>Customer & Commercial<br>Performance Analysis</h1>
+  <div class="project-meta">
+    <div class="meta-item">
+      <span class="meta-label">Dataset</span>
+      <span class="meta-value">500+ user transactions</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Key finding</span>
+      <span class="meta-value">25% spending uplift identified</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Tools</span>
+      <span class="meta-value">Tableau · Excel · Python</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Output</span>
+      <span class="meta-value">Stakeholder insight pack</span>
+    </div>
+  </div>
+</div>
+
+<div class="project-content">
+
+  <h2>The Problem</h2>
+  <p>
+    Loyalty and reward programmes are a significant commercial lever for airlines and retailers alike — but their effectiveness varies substantially by campaign design, customer segment, and timing. Measuring the incremental spend attributable to targeted promotions, rather than organic purchasing behaviour, requires a structured analytical approach that isolates programme impact from baseline trends.
+  </p>
+
+  <h2>Data & Methodology</h2>
+  <p>
+    Transaction and engagement data from 500+ programme participants was analysed across reward campaign periods. The methodology focused on:
+  </p>
+  <ul>
+    <li>Segmenting customers by engagement tier and baseline spend level</li>
+    <li>Isolating campaign-period transactions from non-campaign control windows</li>
+    <li>Calculating incremental spend uplift by promotion type and customer segment</li>
+    <li>Identifying which campaign structures drove the strongest behavioural response</li>
+  </ul>
+
+  <div class="finding-box">
+    <p>Targeted promotions delivered a 25% spending uplift over baseline for engaged programme participants — with the effect concentrated in the mid-tier customer segment rather than high-frequency buyers.</p>
+  </div>
+
+  <h2>Stakeholder Output</h2>
+  <p>
+    Findings were presented in a decision-focused format with clear implications for customer and product strategy — structured as a regular insight pack rather than a one-off report. This mirrors the cadence and format of portfolio-wide performance reporting typical of a commercial analytics function in freight or airline businesses.
+  </p>
+
+  <h2>Commercial Implications</h2>
+  <p>
+    The mid-tier concentration finding has direct strategic implications: maximising programme ROI means prioritising promotions aimed at growing mid-tier customers toward high-frequency behaviour, rather than over-investing in already-loyal top spenders. For an airline loyalty team, this translates to targeted tier-upgrade incentives over blanket discount campaigns.
+  </p>
+
+  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; gap: 1rem;">
+    <a href="airfare.html" class="btn-fill">← First Project</a>
+    <a href="../projects.html" class="btn-ghost">All Projects</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>Ash Karnik · Aviation Analytics · Sydney, NSW</p>
+  <p>aayushk16@outlook.com</p>
+</footer>
+
+<script src="../js/nav.js"></script>
+<script>
+  const io = new IntersectionObserver((e) => {
+    e.forEach(en => { if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)} });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ash Karnik — Aviation Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+  :root {
+    /* ── Palette ── */
+    --white:        #FFFFFF;
+    --off-white:    #FAF8F8;
+    --blush:        #FFF1F2;
+    --salmon:       #FF5D5D;
+    --red:          #D62828;
+    --red-dark:     #A81F1F;
+    --peach:        #FFD6A5;
+
+    /* ── Text tokens — all neutral, no pink ── */
+    --ink:          #111111;
+    --ink-head:     #1C1C1C;
+    --ink-mid:      #1C1C1C;
+    --ink-sub:      #444444;
+    --ink-muted:    #777777;
+    --mist:         #777777;   /* alias so older rules still resolve */
+
+    /* ── Borders — neutral grey ── */
+    --border:       #E5E5E5;
+    --border-light: #F0F0F0;
+    --bg-soft:      #FAF8F8;
+
+    --f-head: 'Cormorant Garamond', Georgia, serif;
+    --f-body: 'DM Sans', sans-serif;
+    --f-mono: 'DM Mono', monospace;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--white);
+    color:var(--ink);
+    font-family:var(--f-body);
+    font-weight:300;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:200;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:1.1rem 4rem;
+    transition:background 0.35s,box-shadow 0.35s;
+  }
+  nav.scrolled{
+    background:rgba(255,255,255,0.97);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    box-shadow:0 1px 0 #e8e8e8;
+  }
+  .nav-logo{
+    font-family:var(--f-body);font-size:0.95rem;
+    font-weight:700;letter-spacing:-0.01em;
+    color:var(--white);text-decoration:none;
+    transition:color 0.35s;
+  }
+  nav.scrolled .nav-logo{color:var(--red)}
+  .nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+  .nav-links a{
+    font-family:var(--f-body);font-size:0.875rem;
+    font-weight:500;
+    color:rgba(255,255,255,0.75);text-decoration:none;
+    transition:color 0.2s;position:relative;padding-bottom:2px;
+  }
+  nav.scrolled .nav-links a{color:#4b4b4b}
+  .nav-links a::after{
+    content:'';position:absolute;bottom:-2px;left:0;
+    width:0;height:2px;background:var(--red);
+    transition:width 0.25s ease;
+  }
+  .nav-links a:hover{color:var(--white)}
+  nav.scrolled .nav-links a:hover{color:#111111}
+  .nav-links a.active{color:var(--white)}
+  nav.scrolled .nav-links a.active{color:var(--red)}
+  .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+
+  /* ─── HERO ─── */
+  .hero{
+    position:relative;height:100vh;min-height:620px;
+    display:flex;align-items:flex-end;overflow:hidden;
+    z-index:1;
+  }
+  .hero-img{
+    position:absolute;inset:0;
+    background:url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1800&q=80&fit=crop')
+      center center/cover no-repeat;
+    transform:scale(1.06);
+    animation:heroZoom 16s ease-out forwards;
+  }
+  @keyframes heroZoom{to{transform:scale(1)}}
+
+  /* Red-tinted overlay that echoes the palette */
+  .hero-overlay{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(to top,
+        rgba(26,8,8,0.96) 0%,
+        rgba(214,40,40,0.35) 40%,
+        rgba(26,8,8,0.05) 100%),
+      linear-gradient(to right,
+        rgba(26,8,8,0.55) 0%,
+        transparent 65%);
+  }
+
+  .hero-content{
+    position:relative;z-index:2;
+    padding:0 4rem 6rem;
+    max-width:860px;
+  }
+  .hero-eyebrow{
+    font-family:var(--f-mono);font-size:0.63rem;
+    letter-spacing:0.26em;text-transform:uppercase;
+    color:var(--peach);margin-bottom:1.6rem;
+    display:flex;align-items:center;gap:1rem;
+    opacity:0;animation:fadeUp 0.9s 0.2s ease forwards;
+  }
+  .hero-eyebrow::before{
+    content:'';width:32px;height:1px;
+    background:var(--peach);display:inline-block;
+  }
+  .hero h1{
+    font-family:var(--f-head);
+    font-size:clamp(4.5rem,11vw,9.5rem);
+    font-weight:700;line-height:0.95;letter-spacing:-0.025em;
+    color:var(--white);margin-bottom:1.75rem;
+    opacity:0;animation:fadeUp 1s 0.4s ease forwards;
+  }
+  .hero h1 em{
+    font-style:italic;
+    color:transparent;
+    -webkit-text-stroke:1.5px var(--salmon);
+  }
+  .hero-body{
+    font-size:1rem;color:rgba(255,255,255,0.55);
+    max-width:460px;line-height:1.85;margin-bottom:2.5rem;
+    opacity:0;animation:fadeUp 1s 0.6s ease forwards;
+  }
+  .hero-ctas{
+    display:flex;gap:1rem;flex-wrap:wrap;
+    opacity:0;animation:fadeUp 1s 0.8s ease forwards;
+  }
+
+  /* scroll cue */
+  .scroll-cue{
+    position:absolute;bottom:2.5rem;right:4rem;z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+    opacity:0;animation:fadeIn 1s 2s ease forwards;
+  }
+  .scroll-cue span{
+    font-family:var(--f-mono);font-size:0.52rem;
+    letter-spacing:0.24em;text-transform:uppercase;
+    color:rgba(255,255,255,0.28);writing-mode:vertical-rl;
+  }
+  .scroll-line{
+    width:1px;height:55px;
+    background:linear-gradient(to bottom,rgba(255,93,93,0.7),transparent);
+    animation:pulse 2.2s 2.5s ease-in-out infinite;
+  }
+  @keyframes pulse{0%,100%{opacity:0.4;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.25)}}
+
+  /* ─── BUTTONS ─── */
+  .btn-fill{
+    display:inline-block;padding:0.85rem 2.4rem;
+    background:var(--red);color:var(--white);
+    font-family:var(--f-mono);font-size:0.66rem;
+    font-weight:400;letter-spacing:0.14em;text-transform:uppercase;
+    text-decoration:none;
+    transition:background 0.2s,transform 0.2s,box-shadow 0.2s;
+  }
+  .btn-fill:hover{
+    background:var(--salmon);transform:translateY(-3px);
+    box-shadow:0 12px 36px rgba(214,40,40,0.35);
+  }
+  .btn-ghost-light{
+    display:inline-block;padding:0.85rem 2.4rem;
+    border:1px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.8);
+    font-family:var(--f-mono);font-size:0.66rem;
+    letter-spacing:0.14em;text-transform:uppercase;
+    text-decoration:none;
+    transition:border-color 0.2s,color 0.2s,transform 0.2s;
+  }
+  .btn-ghost-light:hover{border-color:var(--red);color:var(--red);transform:translateY(-3px)}
+  .btn-ghost-dark{
+    display:inline-block;padding:0.85rem 2.4rem;
+    border:1px solid var(--border);color:var(--ink-sub);
+    font-family:var(--f-mono);font-size:0.66rem;
+    letter-spacing:0.14em;text-transform:uppercase;
+    text-decoration:none;
+    transition:border-color 0.2s,color 0.2s,transform 0.2s;
+  }
+  .btn-ghost-dark:hover{border-color:var(--ink-head);color:var(--ink-head);transform:translateY(-3px)}
+
+  /* ─── MARQUEE ─── */
+  .marquee-wrap{
+    overflow:hidden;
+    background:var(--red);
+    padding:0.85rem 0;
+  }
+  .marquee-track{
+    display:flex;gap:3rem;width:max-content;
+    animation:slide 28s linear infinite;
+  }
+  .marquee-item{
+    font-family:var(--f-mono);font-size:0.58rem;
+    letter-spacing:0.2em;text-transform:uppercase;
+    color:rgba(255,255,255,0.7);white-space:nowrap;
+    display:flex;align-items:center;gap:0.8rem;
+  }
+  .marquee-item::before{
+    content:'';width:3px;height:3px;border-radius:50%;
+    background:var(--peach);display:inline-block;
+  }
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+  /* ─── STATS BAND ─── */
+  .stats-band{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border-bottom:1px solid var(--border);
+    background:var(--blush);
+  }
+  .stat-cell{
+    padding:3rem 2.5rem;border-right:1px solid var(--border);
+    position:relative;overflow:hidden;
+    transition:background 0.3s;cursor:default;
+  }
+  .stat-cell:last-child{border-right:none}
+  .stat-cell::after{
+    content:'';position:absolute;
+    top:0;left:0;width:3px;height:0;
+    background:var(--red);
+    transition:height 0.4s;
+  }
+  .stat-cell:hover{background:var(--white)}
+  .stat-cell:hover::after{height:100%}
+  .stat-num{
+    font-family:var(--f-head);font-size:3rem;
+    font-weight:400;color:var(--ink-head);
+    line-height:1;margin-bottom:0.5rem;
+  }
+  .stat-label{
+    font-family:var(--f-body);font-size:0.8rem;
+    font-weight:500;
+    color:#4b4b4b;line-height:1.5;
+  }
+
+  /* ─── WRAP ─── */
+  .wrap{max-width:1200px;margin:0 auto;padding:0 4rem}
+
+  /* ─── INTRO STRIP ─── */
+  .intro-strip{
+    padding:8rem 0;
+    display:grid;grid-template-columns:1fr 1.6fr;
+    gap:6rem;align-items:start;
+    border-bottom:1px solid var(--border-light);
+  }
+  .section-label{
+    font-family:var(--f-mono);font-size:0.58rem;
+    letter-spacing:0.24em;text-transform:uppercase;
+    color:var(--red);margin-bottom:1.25rem;
+    display:flex;align-items:center;gap:0.75rem;
+  }
+  .section-label::before{
+    content:'';width:20px;height:1px;
+    background:var(--salmon);display:inline-block;
+  }
+  .intro-heading{
+    font-family:var(--f-head);
+    font-size:clamp(2.4rem,4vw,3.8rem);
+    font-weight:700;line-height:1.1;letter-spacing:-0.02em;
+    color:var(--ink-mid);
+  }
+  .intro-heading em{font-style:italic;color:var(--red)}
+  .intro-body p{
+    font-size:1rem;color:var(--ink-sub);
+    line-height:1.9;margin-bottom:1.25rem;
+  }
+  .intro-body p strong{color:var(--ink-mid);font-weight:400}
+  .intro-body p:last-of-type{margin-bottom:2rem}
+
+  /* ─── PROJECTS ─── */
+  .projects-section{padding:7rem 0}
+  .projects-heading{
+    font-family:var(--f-head);
+    font-size:clamp(2rem,3.5vw,3rem);font-weight:300;
+    color:var(--ink-mid);margin-bottom:3.5rem;
+    display:flex;align-items:baseline;gap:2rem;
+  }
+  .projects-heading::after{
+    content:'';flex:1;height:1px;
+    background:var(--border);
+  }
+
+  /* 3-col card grid */
+  .proj-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:1.5rem;
+  }
+  .proj-card{
+    color:inherit;
+    background:var(--off-white);
+    border:1px solid var(--border);
+    padding:2.5rem;
+    text-decoration:none;display:flex;flex-direction:column;
+    position:relative;overflow:hidden;
+    transition:background 0.3s,border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+  }
+  .proj-card::after{
+    content:'';position:absolute;
+    top:0;left:0;right:0;height:3px;
+    background:linear-gradient(90deg,var(--salmon),var(--red));
+    transform:scaleX(0);transform-origin:left;
+    transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+  .proj-card:hover{
+    background:var(--white);border-color:var(--border);
+    transform:translateY(-6px);
+    box-shadow:0 20px 60px rgba(214,40,40,0.1);
+  }
+  .proj-card:hover::after{transform:scaleX(1)}
+
+  .proj-index{
+    font-family:var(--f-mono);font-size:0.54rem;
+    letter-spacing:0.22em;color:var(--red);
+    text-transform:uppercase;margin-bottom:1.75rem;
+  }
+  .proj-card h3{
+    font-family:var(--f-head);font-size:1.5rem;
+    font-weight:400;color:var(--ink-mid);line-height:1.25;
+    margin-bottom:1rem;flex:1;
+    transition:color 0.2s;
+  }
+  .proj-card:hover h3{color:var(--red)}
+  .proj-card p{
+    font-size:0.85rem;color:var(--ink-sub);
+    line-height:1.75;margin-bottom:1.5rem;
+  }
+  .proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.5rem}
+  .proj-tag{
+    font-family:var(--f-mono);font-size:0.54rem;
+    letter-spacing:0.08em;text-transform:uppercase;
+    padding:0.22rem 0.65rem;
+    border:1px solid var(--border);
+    color:var(--ink-sub);
+    transition:border-color 0.2s,color 0.2s;
+  }
+  .proj-card:hover .proj-tag{border-color:rgba(214,40,40,0.2);color:var(--red)}
+  .proj-arrow{
+    font-size:1rem;color:var(--border);
+    align-self:flex-end;
+    transition:color 0.2s,transform 0.25s;
+  }
+  .proj-card:hover .proj-arrow{color:var(--red);transform:translate(3px,-3px)}
+
+  .view-all{margin-top:2.5rem;text-align:right}
+
+  /* ─── IMAGE STRIP ─── */
+  .image-strip{
+    position:relative;height:58vh;min-height:400px;overflow:hidden;
+  }
+  .image-strip-img{
+    position:absolute;inset:0;
+    background:url('https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=1800&q=80&fit=crop')
+      center 35%/cover no-repeat;
+    transition:transform 0.7s ease;
+  }
+  .image-strip:hover .image-strip-img{transform:scale(1.04)}
+  .image-strip-overlay{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(to right,
+        rgba(214,40,40,0.88) 0%,
+        rgba(214,40,40,0.5) 40%,
+        rgba(26,8,8,0.1) 100%);
+    display:flex;align-items:center;
+    padding:0 4rem;
+  }
+  .image-strip-text{max-width:520px}
+  .image-strip-text .strip-label{
+    font-family:var(--f-mono);font-size:0.58rem;
+    letter-spacing:0.24em;text-transform:uppercase;
+    color:var(--peach);margin-bottom:0.9rem;
+  }
+  .image-strip-text h2{
+    font-family:var(--f-head);
+    font-size:clamp(2rem,4vw,3.5rem);
+    font-weight:300;line-height:1.15;
+    color:var(--white);margin-bottom:1.75rem;
+  }
+  .image-strip-text h2 em{font-style:italic;color:var(--peach)}
+
+  /* ─── TOOLS ─── */
+  .tools-section{padding:7rem 0;border-top:1px solid var(--border-light)}
+  .tools-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    gap:0;border:1px solid var(--border);
+  }
+  .tool-cell{
+    background:var(--white);padding:2.25rem;
+    transition:background 0.3s;
+  }
+  .tool-cell:hover{background:var(--blush)}
+  .tool-cell h4{
+    font-family:var(--f-mono);font-size:0.58rem;
+    letter-spacing:0.18em;text-transform:uppercase;
+    color:var(--red);margin-bottom:1.25rem;
+    padding-bottom:0.75rem;
+    border-bottom:1px solid var(--border);
+  }
+  .tool-cell ul{list-style:none}
+  .tool-cell li{
+    font-size:0.87rem;color:var(--ink-sub);
+    padding:0.35rem 0;border-bottom:1px solid var(--border-light);
+    font-weight:300;transition:color 0.2s;
+  }
+  .tool-cell:hover li{color:var(--ink-mid)}
+  .tool-cell li:last-child{border-bottom:none}
+
+  /* ─── CTA BAND ─── */
+  .cta-band{
+    padding:7rem 0;
+    display:grid;grid-template-columns:1fr auto;
+    gap:3rem;align-items:center;
+    border-top:1px solid var(--border-light);
+  }
+  .cta-band h2{
+    font-family:var(--f-head);
+    font-size:clamp(2.2rem,4vw,3.5rem);
+    font-weight:700;line-height:1.1;color:var(--ink-head);letter-spacing:-0.02em;
+  }
+  .cta-band h2 em{font-style:italic;color:var(--red)}
+  .cta-btns{display:flex;gap:1rem;flex-wrap:wrap;justify-content:flex-end}
+
+  /* ─── FOOTER ─── */
+  footer{
+    background:var(--ink);
+    padding:2.5rem 4rem;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  footer p{
+    font-family:var(--f-mono);font-size:0.58rem;
+    letter-spacing:0.1em;color:rgba(255,255,255,0.25);
+  }
+  footer .footer-accent{color:var(--red);letter-spacing:0.06em}
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity 0.75s ease,transform 0.75s ease}
+  .reveal.in{opacity:1;transform:none}
+  .reveal-delay{transition-delay:0.15s}
+
+  /* ─── RESPONSIVE ─── */
+  @media(max-width:768px){
+    nav,nav.scrolled{padding:1.1rem 1.5rem}
+    .hero-content{padding:0 1.5rem 4rem}
+    .wrap{padding:0 1.5rem}
+    .stats-band{grid-template-columns:repeat(2,1fr)}
+    .stat-cell{border-bottom:1px solid var(--border)}
+    .intro-strip{grid-template-columns:1fr;gap:2.5rem;padding:4rem 0}
+    .proj-grid{grid-template-columns:1fr}
+    .tools-grid{grid-template-columns:repeat(2,1fr)}
+    .cta-band{grid-template-columns:1fr;padding:4rem 0}
+    .cta-btns{justify-content:flex-start}
+    .scroll-cue{display:none}
+    footer{flex-direction:column;gap:0.75rem;padding:2rem 1.5rem;text-align:center}
+    .image-strip-overlay{padding:0 1.5rem}
+  }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Ash Karnik</a>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-img"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Aviation Analytics · Sydney, NSW</p>
+    <h1>Data that<br>moves the<br><em>industry.</em></h1>
+    <p class="hero-body">I'm Ash — a Business Analytics graduate from UTS translating complex aviation datasets into clear commercial insight. Python, SQL, Power BI, Tableau — pointed at BITRE and BTS data.</p>
+    <div class="hero-ctas">
+      <a href="projects.html" class="btn-fill">View Projects</a>
+      <a href="contact.html" class="btn-ghost-light">Get in Touch</a>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item">BITRE Domestic Aviation</span>
+    <span class="marquee-item">BTS On-Time Performance</span>
+    <span class="marquee-item">Python · scikit-learn</span>
+    <span class="marquee-item">Revenue Management</span>
+    <span class="marquee-item">Power BI · Tableau</span>
+    <span class="marquee-item">Route Economics</span>
+    <span class="marquee-item">Demand Forecasting</span>
+    <span class="marquee-item">UTS · Master of Business Analytics</span>
+    <span class="marquee-item">BITRE Domestic Aviation</span>
+    <span class="marquee-item">BTS On-Time Performance</span>
+    <span class="marquee-item">Python · scikit-learn</span>
+    <span class="marquee-item">Revenue Management</span>
+    <span class="marquee-item">Power BI · Tableau</span>
+    <span class="marquee-item">Route Economics</span>
+    <span class="marquee-item">Demand Forecasting</span>
+    <span class="marquee-item">UTS · Master of Business Analytics</span>
+  </div>
+</div>
+
+<!-- ── STATS ── -->
+<div class="stats-band reveal">
+  <div class="stat-cell">
+    <div class="stat-num">5.47</div>
+    <div class="stat-label">GPA · UTS<br>Master of Business Analytics</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">98.4%</div>
+    <div class="stat-label">Model accuracy<br>Airline fare pricing</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">25%</div>
+    <div class="stat-label">DB accuracy uplift<br>iSchoolConnect</div>
+  </div>
+  <div class="stat-cell">
+    <div class="stat-num">5</div>
+    <div class="stat-label">Completed analytical<br>projects</div>
+  </div>
+</div>
+
+<!-- ── INTRO ── -->
+<div class="wrap">
+  <div class="intro-strip reveal">
+    <div>
+      <p class="section-label">Who I am</p>
+      <h2 class="intro-heading">Turning aviation data into<br><em>commercial clarity.</em></h2>
+    </div>
+    <div class="intro-body">
+      <p>Aviation generates enormous amounts of data — on routes, fares, demand, delays, and fleet efficiency. The challenge isn't collecting it. It's building <strong>analysis that a commercial team can act on.</strong></p>
+      <p>My portfolio is built entirely on publicly available BITRE and BTS datasets, applying Python, SQL, and BI tools to the kinds of questions that sit on the desks of <strong>Flight Analysts and Commercial Performance Analysts</strong> every day.</p>
+      <a href="about.html" class="btn-ghost-dark">Read my story</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── PROJECTS ── -->
+<div class="wrap">
+  <div class="projects-section reveal">
+    <p class="section-label">Selected work</p>
+    <h2 class="projects-heading">Featured Projects</h2>
+    <div class="proj-grid">
+
+      <a href="projects/airfare.html" class="proj-card">
+        <p class="proj-index">01 · Python · ML</p>
+        <h3>Airline Fare Pricing Model</h3>
+        <p>98.4% accuracy across six modelling approaches — mirroring airline revenue management and commercial performance analysis.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">scikit-learn</span>
+          <span class="proj-tag">Revenue Mgmt</span>
+        </div>
+        <span class="proj-arrow">↗</span>
+      </a>
+
+      <a href="projects/demand.html" class="proj-card">
+        <p class="proj-index">02 · BITRE · Power BI</p>
+        <h3>Australian Aviation Demand Dashboard</h3>
+        <p>Route-level passenger trends and COVID recovery visualisation built for regular commercial stakeholder reporting.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">BITRE</span>
+          <span class="proj-tag">Power BI</span>
+          <span class="proj-tag">Tableau</span>
+        </div>
+        <span class="proj-arrow">↗</span>
+      </a>
+
+      <a href="projects/efficiency.html" class="proj-card">
+        <p class="proj-index">03 · BTS · Python</p>
+        <h3>Airline Delay & Disruption Cost Analysis</h3>
+        <p>Cost driver modelling using BTS delay data — attributing disruption by cause, framed as operational recommendations.</p>
+        <div class="proj-tags">
+          <span class="proj-tag">BTS</span>
+          <span class="proj-tag">Python</span>
+          <span class="proj-tag">Cost Analysis</span>
+        </div>
+        <span class="proj-arrow">↗</span>
+      </a>
+
+    </div>
+    <div class="view-all">
+      <a href="projects.html" class="btn-ghost-dark">View all 5 projects →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── IMAGE STRIP ── -->
+<div class="image-strip reveal">
+  <div class="image-strip-img"></div>
+  <div class="image-strip-overlay">
+    <div class="image-strip-text">
+      <p class="strip-label">The goal</p>
+      <h2>Built for the Australian aviation <em>industry.</em></h2>
+      <a href="contact.html" class="btn-fill">Get in Touch</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── TOOLS ── -->
+<div class="wrap">
+  <div class="tools-section reveal">
+    <p class="section-label">Stack</p>
+    <h2 class="projects-heading" style="margin-bottom:2.5rem">Tools & Methods</h2>
+    <div class="tools-grid">
+      <div class="tool-cell">
+        <h4>Python</h4>
+        <ul>
+          <li>pandas · numpy</li>
+          <li>scikit-learn</li>
+          <li>matplotlib · seaborn</li>
+          <li>Isolation Forest · LOF</li>
+        </ul>
+      </div>
+      <div class="tool-cell">
+        <h4>SQL & Databases</h4>
+        <ul>
+          <li>Subqueries · CTEs</li>
+          <li>Window functions · RANK</li>
+          <li>Snowflake (developing)</li>
+          <li>Large-scale extraction</li>
+        </ul>
+      </div>
+      <div class="tool-cell">
+        <h4>Visualisation</h4>
+        <ul>
+          <li>Power BI</li>
+          <li>Tableau</li>
+          <li>Excel (pivot · XLOOKUP)</li>
+          <li>SAS (PROC SQL)</li>
+        </ul>
+      </div>
+      <div class="tool-cell">
+        <h4>Aviation Data</h4>
+        <ul>
+          <li>BITRE Domestic Aviation</li>
+          <li>BTS On-Time Performance</li>
+          <li>ATSB Safety Events</li>
+          <li>Route economics</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CTA BAND ── -->
+<div class="wrap">
+  <div class="cta-band reveal">
+    <h2>Targeting aviation analytics roles<br>in <em>Australia.</em></h2>
+    <div class="cta-btns">
+      <a href="about.html" class="btn-ghost-dark">Read my story</a>
+      <a href="contact.html" class="btn-fill">Get in Touch</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>Ash Karnik · Aviation Analytics · Sydney, NSW</p>
+  <p><span class="footer-accent">aayushk16@outlook.com</span></p>
+</footer>
+
+<script>
+  /* Nav is always solid — no scroll toggle needed */
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)} });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

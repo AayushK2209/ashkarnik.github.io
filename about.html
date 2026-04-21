@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Ash Karnik Aviation Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ash Karnik ↗ Analytics</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<main class="page">
+
+  <section class="section reveal" style="padding-top: 8rem;">
+    <div class="section-header">
+      <span class="section-num">About</span>
+      <h2 class="section-title">The analyst<br>behind the data.</h2>
+    </div>
+
+    <div class="about-grid">
+
+      <div class="about-sidebar">
+        <h2>Ash Karnik</h2>
+        <p class="role">Master of Business Analytics · UTS Sydney</p>
+
+        <div class="timeline">
+          <div class="timeline-item">
+            <p class="timeline-year">Aug 2023 – Jul 2025</p>
+            <h4>Master of Business Analytics</h4>
+            <p>University of Technology Sydney · GPA 5.47 / 7</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">2024 – 2025</p>
+            <h4>Certificate III in IT (Cloud Computing)</h4>
+            <p>upskilled.edu.au · Certificate III in Business</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">May 2024 – Present</p>
+            <h4>Shift Leader</h4>
+            <p>Guzman y Gomez · Dee Why, Sydney</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">Oct 2022 – Jun 2023</p>
+            <h4>Data Research Intern</h4>
+            <p>iSchoolConnect Technologies Pvt. Ltd</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">Aug 2021 – Jun 2022</p>
+            <h4>Volunteer · Accessibility Support</h4>
+            <p>Saathi Enabling Centre</p>
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+          <p style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem;">Languages</p>
+          <p style="font-size: 0.85rem; color: var(--white-dim); line-height: 1.8;">English · Hindi · Marathi · Nepali</p>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <p style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem;">Target Roles</p>
+          <p style="font-size: 0.85rem; color: var(--white-dim); line-height: 1.8;">Data Analyst · Flight Analyst<br>Commercial Performance Analyst</p>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <p style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem;">Contact</p>
+          <p style="font-size: 0.85rem; color: var(--white-dim); line-height: 1.8;">aayushk16@outlook.com<br>0492 980 708</p>
+        </div>
+      </div>
+
+      <div class="about-body">
+        <p>
+          I'm a Business Analytics graduate from the University of Technology Sydney with a focused interest in the commercial and operational dynamics of aviation. My work sits at the intersection of data science and airline economics — translating complex datasets into clear performance insights for both business and technical stakeholders.
+        </p>
+        <p>
+          My aviation portfolio directly mirrors the work of commercial and flight analyst teams: I've built a <strong>predictive airline fare pricing model</strong> achieving 98.4% accuracy across six modelling approaches, and I'm developing a <strong>route-level demand dashboard</strong> using BITRE domestic aviation data to analyse passenger trends and COVID recovery patterns. A third project models operational disruption costs using BTS delay data, framing findings as business recommendations rather than raw statistics.
+        </p>
+        <p>
+          Before UTS, I worked as a <strong>Data Research Intern at iSchoolConnect Technologies</strong>, where I improved database accuracy by 25% across 500+ institutions, reduced redundant data collection by 40%, and standardised reporting methodology across three international regions. That experience reinforced something I now carry into every analysis: the value of data work is only realised when it reaches a decision-maker in a form they can act on.
+        </p>
+        <p>
+          In my current role as <strong>Shift Leader at Guzman y Gomez</strong>, I manage real-time operational performance across a high-volume environment — coordinating staffing, resolving disruptions, and maintaining compliance under time pressure. The instincts built there translate directly to airline ground operations and logistics contexts.
+        </p>
+        <p>
+          I'm multilingual across English, Hindi, Marathi, and Nepali, and I bring the same discipline to data that I apply to everything I take seriously. I'm actively targeting commercial analytics roles in the Australian aviation sector.
+        </p>
+
+        <div style="margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="projects.html" class="btn-fill">View My Projects</a>
+          <a href="contact.html" class="btn-ghost">Get in Touch</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>Ash Karnik · Aviation Analytics · Sydney, NSW</p>
+  <p>aayushk16@outlook.com</p>
+</footer>
+
+<script src="../js/nav.js"></script>
+<script>
+  const reveals = document.querySelectorAll(".reveal");
+  if (reveals.length) {
+    const io = new IntersectionObserver((e) => { e.forEach(en => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } }); }, { threshold: 0.1 });
+    reveals.forEach(r => io.observe(r));
+  }
+</script>
+</body>
+</html>

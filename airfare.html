@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airline Fare Pricing Model — Ash Karnik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Ash Karnik ↗ Analytics</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../projects.html">Projects</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="project-detail-header">
+  <a href="../projects.html" class="back-link">← Back to Projects</a>
+  <div style="font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem;">Project 01 · Python · Machine Learning</div>
+  <h1>Airline Fare<br>Pricing Model</h1>
+  <div class="project-meta">
+    <div class="meta-item">
+      <span class="meta-label">Domain</span>
+      <span class="meta-value">Revenue Management</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Accuracy</span>
+      <span class="meta-value">98.4% across 6 models</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Methods</span>
+      <span class="meta-value">Regression · Ensemble · MAE · RMSE</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Tools</span>
+      <span class="meta-value">Python · scikit-learn · pandas</span>
+    </div>
+  </div>
+</div>
+
+<div class="project-content">
+
+  <h2>The Problem</h2>
+  <p>
+    Airline ticket pricing is one of the most complex revenue management challenges in commercial aviation. Fares fluctuate based on route, carrier, departure timing, booking window, seat class, and demand dynamics — often within the same hour. For commercial teams, understanding the relative weight of each driver is critical for pricing strategy, competitive benchmarking, and yield optimisation.
+  </p>
+  <p>
+    This project builds a predictive model for airline ticket fares, treating the problem as a structured regression task and evaluating six distinct modelling approaches to identify the most reliable solution.
+  </p>
+
+  <h2>Data & Feature Engineering</h2>
+  <p>
+    Business variables — route, airline, departure timing, and booking characteristics — were translated into structured analytical features suitable for machine learning. Key engineering steps included encoding categorical variables (carrier, origin/destination), extracting time-based features (day of week, time-to-departure, season), and normalising continuous inputs for model comparability.
+  </p>
+  <p>Models evaluated across the six approaches included:</p>
+  <ul>
+    <li>Linear regression (baseline)</li>
+    <li>Ridge and Lasso regularised regression</li>
+    <li>Decision tree regressor</li>
+    <li>Random forest ensemble</li>
+    <li>Gradient boosting (XGBoost)</li>
+  </ul>
+
+  <div class="finding-box">
+    <p>Gradient boosting delivered the highest accuracy at 98.4%, with departure timing and booking window emerging as the most influential fare drivers — outweighing route distance in predictive importance.</p>
+  </div>
+
+  <h2>Decision-Support Output</h2>
+  <p>
+    Findings were presented through an interactive decision-support tool designed for non-technical stakeholders — translating model outputs into plain-language pricing implications. This reflects a core principle of commercial analytics: precision in the model is wasted if the insight doesn't reach the decision-maker in an actionable form.
+  </p>
+
+  <h2>Commercial Implications</h2>
+  <p>
+    For a revenue management or commercial performance team, this model surfaces two practical applications: a competitive fare benchmarking tool (comparing predicted fares against actual market pricing) and a yield sensitivity analyser (quantifying how fare changes in response to timing and demand shifts). Both are directly relevant to dynamic pricing and schedule planning functions within an airline commercial team.
+  </p>
+
+  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; gap: 1rem;">
+    <a href="demand.html" class="btn-fill">Next Project →</a>
+    <a href="../projects.html" class="btn-ghost">All Projects</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>Ash Karnik · Aviation Analytics · Sydney, NSW</p>
+  <p>aayushk16@outlook.com</p>
+</footer>
+
+<script src="../js/nav.js"></script>
+<script>
+  const io = new IntersectionObserver((e) => {
+    e.forEach(en => { if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)} });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>

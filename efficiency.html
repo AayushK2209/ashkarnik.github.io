@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Airline Delay Analysis — Ash Karnik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="nav-logo">Ash Karnik ↗ Analytics</a>
+  <ul class="nav-links">
+    <li><a href="../index.html">Home</a></li>
+    <li><a href="../projects.html">Projects</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="project-detail-header">
+  <a href="../projects.html" class="back-link">← Back to Projects</a>
+  <div style="font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem;">Project 03 · BTS · Python</div>
+  <h1>Airline Delay &<br>Disruption Cost Analysis</h1>
+  <div class="project-meta">
+    <div class="meta-item">
+      <span class="meta-label">Dataset</span>
+      <span class="meta-value">BTS On-Time Performance</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Methods</span>
+      <span class="meta-value">Cost driver modelling · Root cause attribution</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Tools</span>
+      <span class="meta-value">Python · pandas · matplotlib</span>
+    </div>
+    <div class="meta-item">
+      <span class="meta-label">Output</span>
+      <span class="meta-value">Business recommendations</span>
+    </div>
+  </div>
+</div>
+
+<div class="project-content">
+
+  <h2>The Problem</h2>
+  <p>
+    Flight delays are among the most visible and costly operational failures in commercial aviation — affecting passenger experience, crew productivity, asset utilisation, and downstream schedule integrity. The US Bureau of Transportation Statistics classifies delays by cause: carrier, weather, National Aviation System (NAS), security, and late aircraft. Understanding the relative contribution of each category, and how it varies by carrier and route type, is foundational to operational improvement and cost control.
+  </p>
+
+  <h2>Data & Methodology</h2>
+  <p>
+    BTS On-Time Performance data provides flight-level delay information for US carriers, including cause category, delay minutes, and carrier-route identifiers. The analysis models delay cost drivers by:
+  </p>
+  <ul>
+    <li>Attributing delay minutes by cause category (carrier vs external) per carrier</li>
+    <li>Estimating operational cost exposure using published per-minute delay cost proxies</li>
+    <li>Identifying high-impact route-carrier combinations for targeted intervention</li>
+    <li>Comparing carrier-controllable vs non-controllable delay ratios as an operational discipline indicator</li>
+  </ul>
+
+  <div class="finding-box">
+    <p>Carrier-attributable delays represent the largest controllable cost exposure — and vary significantly between carriers with similar route networks, suggesting operational rather than structural drivers.</p>
+  </div>
+
+  <h2>Commercial Implications</h2>
+  <p>
+    For an operations or commercial performance team, this analysis identifies where investment in ground operations, turnaround efficiency, or crew scheduling would generate measurable cost reduction. The framing — as business recommendations rather than raw statistics — reflects the output expected of an analyst embedded in a commercial or operational function.
+  </p>
+
+  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; gap: 1rem;">
+    <a href="anomaly.html" class="btn-fill">Next Project →</a>
+    <a href="../projects.html" class="btn-ghost">All Projects</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>Ash Karnik · Aviation Analytics · Sydney, NSW</p>
+  <p>aayushk16@outlook.com</p>
+</footer>
+
+<script src="../js/nav.js"></script>
+<script>
+  const io = new IntersectionObserver((e) => {
+    e.forEach(en => { if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)} });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
