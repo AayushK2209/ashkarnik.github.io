@@ -3,57 +3,194 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About — Ash Karnik Aviation Analytics</title>
+  <title>About — Ash Karnik</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+  :root {
+    --white:#FFFFFF;--off-white:#FAF8F8;--blush:#FFF1F2;--salmon:#FF5D5D;
+    --red:#D62828;--red-dark:#A81F1F;--peach:#FFD6A5;
+    --ink:#111111;--ink-head:#1C1C1C;--ink-sub:#444444;--ink-muted:#777777;
+    --border:#E5E5E5;--border-light:#F0F0F0;
+    --f-head:'Cormorant Garamond',Georgia,serif;
+    --f-body:'DM Sans',sans-serif;
+    --f-mono:'DM Mono',monospace;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--white);color:var(--ink);font-family:var(--f-body);font-weight:400;line-height:1.7;overflow-x:hidden}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 4rem;background:#ffffff;border-bottom:1px solid #E5E5E5;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+  .nav-logo{font-family:var(--f-body);font-size:0.95rem;font-weight:700;color:var(--ink-head);text-decoration:none;transition:color 0.2s}
+  .nav-logo:hover{color:var(--red)}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-family:var(--f-body);font-size:0.875rem;font-weight:500;color:var(--ink-sub);text-decoration:none;transition:color 0.2s;position:relative;padding-bottom:2px}
+  .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--red);transition:width 0.25s}
+  .nav-links a:hover{color:var(--ink-head)}
+  .nav-links a:hover::after{width:100%}
+  .nav-links a.active{color:var(--red);font-weight:600}
+  .nav-links a.active::after{width:100%}
+
+  /* PAGE HERO */
+  .page-hero{background:var(--ink-head);padding:6rem 4rem 4.5rem;position:relative;overflow:hidden}
+  .page-hero::after{content:'';position:absolute;top:0;right:0;width:35%;height:100%;background:linear-gradient(135deg,transparent,rgba(214,40,40,0.07));pointer-events:none}
+  .page-hero-inner{max-width:1100px;margin:0 auto}
+  .page-eyebrow{font-family:var(--f-mono);font-size:0.65rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);margin-bottom:1.1rem;display:flex;align-items:center;gap:0.75rem}
+  .page-eyebrow::before{content:'';width:22px;height:1px;background:var(--red);display:inline-block}
+  .page-hero h1{font-family:var(--f-head);font-size:clamp(3rem,6vw,5rem);font-weight:700;line-height:1.0;color:#fff;letter-spacing:-0.025em;margin-bottom:1rem}
+  .page-hero h1 em{font-style:italic;color:transparent;-webkit-text-stroke:1.5px var(--red)}
+  .page-hero-sub{font-size:1rem;color:rgba(255,255,255,0.5);max-width:560px;line-height:1.8}
+
+  /* LAYOUT */
+  .section{max-width:1100px;margin:0 auto;padding:5rem 4rem}
+  .section-label{font-family:var(--f-mono);font-size:0.65rem;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--red);margin-bottom:0.75rem;display:block}
+  .section-title{font-family:var(--f-head);font-size:clamp(2rem,4vw,3rem);font-weight:700;color:var(--ink-head);line-height:1.1;letter-spacing:-0.02em;margin-bottom:2.5rem}
+
+  /* ABOUT GRID */
+  .about-grid{display:grid;grid-template-columns:300px 1fr;gap:5rem;align-items:start}
+
+  /* SIDEBAR */
+  .about-sidebar{}
+  .about-name{font-family:var(--f-head);font-size:2.5rem;font-weight:700;color:var(--ink-head);line-height:1.05;letter-spacing:-0.02em;margin-bottom:0.4rem}
+  .about-role{font-family:var(--f-mono);font-size:0.65rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--red);margin-bottom:2rem}
+
+  /* INFO BLOCKS */
+  .info-block{margin-bottom:1.75rem;padding-bottom:1.75rem;border-bottom:1px solid var(--border)}
+  .info-block:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+  .info-label{font-family:var(--f-mono);font-size:0.6rem;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--red);margin-bottom:0.6rem}
+  .info-value{font-size:0.9rem;color:var(--ink-sub);line-height:1.7}
+  .info-value strong{color:var(--ink-head);font-weight:600}
+
+  /* TIMELINE */
+  .timeline{display:flex;flex-direction:column;gap:0}
+  .timeline-item{padding:1.1rem 0 1.1rem 1.25rem;border-left:2px solid var(--border);position:relative;transition:border-color 0.2s}
+  .timeline-item:hover{border-left-color:var(--red)}
+  .timeline-item::before{content:'';position:absolute;left:-5px;top:1.4rem;width:8px;height:8px;background:var(--red);border-radius:50%}
+  .timeline-year{font-family:var(--f-mono);font-size:0.6rem;font-weight:500;color:var(--red);letter-spacing:0.08em;margin-bottom:0.2rem}
+  .timeline-item h4{font-size:0.92rem;font-weight:600;color:var(--ink-head);margin-bottom:0.15rem}
+  .timeline-item p{font-size:0.83rem;color:var(--ink-muted)}
+
+  /* BODY */
+  .about-body{}
+  .about-body p{font-size:1rem;color:var(--ink-sub);line-height:1.9;margin-bottom:1.4rem}
+  .about-body p:last-of-type{margin-bottom:0}
+  .about-body p strong{color:var(--ink-head);font-weight:600}
+  .about-body h3{font-family:var(--f-head);font-size:1.6rem;font-weight:700;color:var(--ink-head);letter-spacing:-0.015em;margin:2.5rem 0 1rem}
+
+  /* SKILLS STRIP */
+  .skills-strip{max-width:1100px;margin:0 auto;padding:0 4rem 5rem}
+  .skills-grid{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border)}
+  .skill-group{background:var(--white);padding:2rem;border-right:1px solid var(--border);transition:background 0.25s}
+  .skill-group:last-child{border-right:none}
+  .skill-group:hover{background:var(--off-white)}
+  .skill-group h4{font-family:var(--f-body);font-size:0.78rem;font-weight:600;text-transform:uppercase;letter-spacing:0.06em;color:var(--red);margin-bottom:1rem;padding-bottom:0.65rem;border-bottom:1px solid var(--border)}
+  .skill-group ul{list-style:none}
+  .skill-group li{font-size:0.88rem;color:var(--ink-sub);padding:0.32rem 0;border-bottom:1px solid var(--border-light)}
+  .skill-group li:last-child{border-bottom:none}
+
+  /* CTA */
+  .about-cta{background:var(--ink-head);padding:4rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap}
+  .about-cta h3{font-family:var(--f-head);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-0.02em}
+  .about-cta h3 em{font-style:italic;color:var(--red)}
+  .cta-btns{display:flex;gap:1rem;flex-wrap:wrap}
+
+  /* BUTTONS */
+  .btn-fill{display:inline-block;padding:0.8rem 2.2rem;background:var(--red);color:var(--white);font-family:var(--f-body);font-size:0.875rem;font-weight:600;letter-spacing:0.02em;text-decoration:none;transition:background 0.2s,transform 0.2s,box-shadow 0.2s;border:none;cursor:pointer}
+  .btn-fill:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(214,40,40,0.3)}
+  .btn-ghost-light{display:inline-block;padding:0.8rem 2.2rem;border:1.5px solid rgba(255,255,255,0.3);color:rgba(255,255,255,0.85);font-family:var(--f-body);font-size:0.875rem;font-weight:600;letter-spacing:0.02em;text-decoration:none;transition:border-color 0.2s,color 0.2s,transform 0.2s}
+  .btn-ghost-light:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
+
+  /* FOOTER */
+  footer{background:var(--ink-head);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06)}
+  footer p{font-family:var(--f-mono);font-size:0.62rem;letter-spacing:0.08em;color:rgba(255,255,255,0.25)}
+  .footer-accent{color:var(--peach)}
+
+  /* REVEAL */
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem}
+    .page-hero{padding:5rem 1.5rem 3rem}
+    .section{padding:3.5rem 1.5rem}
+    .about-grid{grid-template-columns:1fr;gap:3rem}
+    .skills-strip{padding:0 1.5rem 4rem}
+    .skills-grid{grid-template-columns:repeat(2,1fr)}
+    .skill-group{border-bottom:1px solid var(--border);border-right:none}
+    .about-cta{padding:2.5rem 1.5rem;flex-direction:column;align-items:flex-start}
+    footer{flex-direction:column;gap:0.5rem;padding:2rem 1.5rem;text-align:center}
+  }
+  </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Ash Karnik ↗ Analytics</a>
+  <a href="index.html" class="nav-logo">Ash Karnik</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="projects.html">Projects</a></li>
-    <li><a href="about.html">About</a></li>
+    <li><a href="about.html" class="active">About</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
 </nav>
 
-<main class="page">
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <p class="page-eyebrow">About me</p>
+    <h1>The analyst<br>behind the <em>data.</em></h1>
+    <p class="page-hero-sub">Business Analytics graduate from UTS. Building a career at the intersection of aviation and commercial data science.</p>
+  </div>
+</div>
 
-  <section class="section reveal" style="padding-top: 8rem;">
-    <div class="section-header">
-      <span class="section-num">About</span>
-      <h2 class="section-title">The analyst<br>behind the data.</h2>
-    </div>
+<section class="section reveal">
+  <div class="about-grid">
 
-    <div class="about-grid">
+    <div class="about-sidebar">
+      <h2 class="about-name">Ash Karnik</h2>
+      <p class="about-role">Master of Business Analytics · UTS</p>
 
-      <div class="about-sidebar">
-        <h2>Ash Karnik</h2>
-        <p class="role">Master of Business Analytics · UTS Sydney</p>
+      <div class="info-block">
+        <p class="info-label">Education</p>
+        <p class="info-value"><strong>Master of Business Analytics</strong><br>University of Technology Sydney<br>GPA 5.47 / 7 · 2023–2025</p>
+      </div>
 
-        <div class="timeline">
-          <div class="timeline-item">
-            <p class="timeline-year">Aug 2023 – Jul 2025</p>
-            <h4>Master of Business Analytics</h4>
-            <p>University of Technology Sydney · GPA 5.47 / 7</p>
-          </div>
-          <div class="timeline-item">
-            <p class="timeline-year">2024 – 2025</p>
-            <h4>Certificate III in IT (Cloud Computing)</h4>
-            <p>upskilled.edu.au · Certificate III in Business</p>
-          </div>
+      <div class="info-block">
+        <p class="info-label">Certifications</p>
+        <p class="info-value">Certificate III in IT (Cloud Computing)<br>Certificate III in Business<br>upskilled.edu.au · 2024–2025</p>
+      </div>
+
+      <div class="info-block">
+        <p class="info-label">Based in</p>
+        <p class="info-value"><strong>Sydney, NSW</strong><br>Available for hybrid and on-site roles</p>
+      </div>
+
+      <div class="info-block">
+        <p class="info-label">Languages</p>
+        <p class="info-value">English · Hindi · Marathi · Nepali</p>
+      </div>
+
+      <div class="info-block">
+        <p class="info-label">Target roles</p>
+        <p class="info-value">Data Analyst · Flight Analyst<br>Commercial Performance Analyst</p>
+      </div>
+
+      <div class="info-block">
+        <p class="info-label">Experience timeline</p>
+        <div class="timeline" style="margin-top:0.75rem">
           <div class="timeline-item">
             <p class="timeline-year">May 2024 – Present</p>
             <h4>Shift Leader</h4>
-            <p>Guzman y Gomez · Dee Why, Sydney</p>
+            <p>Guzman y Gomez · Sydney</p>
+          </div>
+          <div class="timeline-item">
+            <p class="timeline-year">Aug 2023 – Jul 2025</p>
+            <h4>Master of Business Analytics</h4>
+            <p>University of Technology Sydney</p>
           </div>
           <div class="timeline-item">
             <p class="timeline-year">Oct 2022 – Jun 2023</p>
             <h4>Data Research Intern</h4>
-            <p>iSchoolConnect Technologies Pvt. Ltd</p>
+            <p>iSchoolConnect Technologies</p>
           </div>
           <div class="timeline-item">
             <p class="timeline-year">Aug 2021 – Jun 2022</p>
@@ -61,63 +198,107 @@
             <p>Saathi Enabling Centre</p>
           </div>
         </div>
-
-        <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
-          <p style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem;">Languages</p>
-          <p style="font-size: 0.85rem; color: var(--white-dim); line-height: 1.8;">English · Hindi · Marathi · Nepali</p>
-        </div>
-
-        <div style="margin-top: 1.5rem;">
-          <p style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem;">Target Roles</p>
-          <p style="font-size: 0.85rem; color: var(--white-dim); line-height: 1.8;">Data Analyst · Flight Analyst<br>Commercial Performance Analyst</p>
-        </div>
-
-        <div style="margin-top: 1.5rem;">
-          <p style="font-family: var(--font-mono); font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem;">Contact</p>
-          <p style="font-size: 0.85rem; color: var(--white-dim); line-height: 1.8;">aayushk16@outlook.com<br>0492 980 708</p>
-        </div>
       </div>
-
-      <div class="about-body">
-        <p>
-          I'm a Business Analytics graduate from the University of Technology Sydney with a focused interest in the commercial and operational dynamics of aviation. My work sits at the intersection of data science and airline economics — translating complex datasets into clear performance insights for both business and technical stakeholders.
-        </p>
-        <p>
-          My aviation portfolio directly mirrors the work of commercial and flight analyst teams: I've built a <strong>predictive airline fare pricing model</strong> achieving 98.4% accuracy across six modelling approaches, and I'm developing a <strong>route-level demand dashboard</strong> using BITRE domestic aviation data to analyse passenger trends and COVID recovery patterns. A third project models operational disruption costs using BTS delay data, framing findings as business recommendations rather than raw statistics.
-        </p>
-        <p>
-          Before UTS, I worked as a <strong>Data Research Intern at iSchoolConnect Technologies</strong>, where I improved database accuracy by 25% across 500+ institutions, reduced redundant data collection by 40%, and standardised reporting methodology across three international regions. That experience reinforced something I now carry into every analysis: the value of data work is only realised when it reaches a decision-maker in a form they can act on.
-        </p>
-        <p>
-          In my current role as <strong>Shift Leader at Guzman y Gomez</strong>, I manage real-time operational performance across a high-volume environment — coordinating staffing, resolving disruptions, and maintaining compliance under time pressure. The instincts built there translate directly to airline ground operations and logistics contexts.
-        </p>
-        <p>
-          I'm multilingual across English, Hindi, Marathi, and Nepali, and I bring the same discipline to data that I apply to everything I take seriously. I'm actively targeting commercial analytics roles in the Australian aviation sector.
-        </p>
-
-        <div style="margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-          <a href="projects.html" class="btn-fill">View My Projects</a>
-          <a href="contact.html" class="btn-ghost">Get in Touch</a>
-        </div>
-      </div>
-
     </div>
-  </section>
 
-</main>
+    <div class="about-body">
+      <p>
+        I'm a Business Analytics graduate from the University of Technology Sydney with a focused interest in the commercial and operational dynamics of aviation. My work sits at the intersection of data science and airline economics — translating complex datasets into clear performance insights that commercial teams can actually act on.
+      </p>
+      <p>
+        My aviation portfolio directly mirrors the work of commercial and flight analyst teams. I've built a <strong>predictive airline fare pricing model</strong> achieving 98.4% accuracy across six modelling approaches, and I'm developing a <strong>route-level demand dashboard</strong> using BITRE domestic aviation data to analyse passenger trends and COVID recovery patterns. A third project models operational disruption costs using BTS delay data, framing findings as business recommendations rather than raw statistics.
+      </p>
+
+      <h3>Where I've worked</h3>
+      <p>
+        Before UTS, I worked as a <strong>Data Research Intern at iSchoolConnect Technologies</strong> — improving database accuracy by 25% across 500+ institutions, reducing redundant data collection by 40%, and standardising reporting methodology across three international regions. That role taught me something I carry into every analysis: the value of data work is only realised when it reaches a decision-maker in a form they can act on.
+      </p>
+      <p>
+        In my current role as <strong>Shift Leader at Guzman y Gomez</strong>, I manage real-time operational performance across a high-volume environment — coordinating staffing, resolving disruptions, and maintaining compliance under time pressure. The operational instincts built there translate directly to airline ground and logistics contexts.
+      </p>
+
+      <h3>How I think about data</h3>
+      <p>
+        I'm drawn to aviation because it's one of the few industries where data quality has direct safety and commercial consequences. Every route decision, every pricing call, every capacity plan is underpinned by data — and getting that analysis wrong is expensive. That stakes-driven environment is exactly where I want to work.
+      </p>
+      <p>
+        I'm multilingual across English, Hindi, Marathi, and Nepali, and I bring the same discipline to data that I apply to everything I take seriously. I'm actively targeting commercial analytics roles in the Australian aviation sector, with particular interest in how data can support revenue management, route strategy, and capacity planning decisions.
+      </p>
+
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem">
+        <a href="projects.html" class="btn-fill">View My Projects</a>
+        <a href="contact.html" class="btn-ghost-light" style="border-color:var(--border);color:var(--ink-sub)">Get in Touch</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr style="border:none;border-top:1px solid var(--border)">
+
+<div class="skills-strip reveal">
+  <div style="max-width:1100px;margin:0 auto;padding:4rem 0 0.5rem">
+    <span class="section-label">Stack</span>
+    <h2 style="font-family:var(--f-head);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:700;color:var(--ink-head);letter-spacing:-0.02em;margin-bottom:2.5rem">Tools & Methods</h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <h4>Python</h4>
+      <ul>
+        <li>pandas · numpy</li>
+        <li>scikit-learn</li>
+        <li>matplotlib · seaborn</li>
+        <li>Isolation Forest · LOF</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>SQL & Databases</h4>
+      <ul>
+        <li>Subqueries · CTEs</li>
+        <li>Window functions · RANK</li>
+        <li>Snowflake (developing)</li>
+        <li>Large-scale extraction</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Visualisation</h4>
+      <ul>
+        <li>Power BI</li>
+        <li>Tableau</li>
+        <li>Excel (pivot · XLOOKUP)</li>
+        <li>SAS (PROC SQL)</li>
+      </ul>
+    </div>
+    <div class="skill-group">
+      <h4>Aviation Data</h4>
+      <ul>
+        <li>BITRE Domestic Aviation</li>
+        <li>BTS On-Time Performance</li>
+        <li>ATSB Safety Events</li>
+        <li>Route economics</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="about-cta reveal">
+  <h3>Targeting aviation analytics roles<br>in <em>Australia.</em></h3>
+  <div class="cta-btns">
+    <a href="projects.html" class="btn-ghost-light">View Projects</a>
+    <a href="contact.html" class="btn-fill">Get in Touch</a>
+  </div>
+</div>
 
 <footer>
   <p>Ash Karnik · Aviation Analytics · Sydney, NSW</p>
-  <p>aayushk16@outlook.com</p>
+  <p><span class="footer-accent">aayushk16@outlook.com</span></p>
 </footer>
 
-<script src="../js/nav.js"></script>
 <script>
-  const reveals = document.querySelectorAll(".reveal");
-  if (reveals.length) {
-    const io = new IntersectionObserver((e) => { e.forEach(en => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } }); }, { threshold: 0.1 });
-    reveals.forEach(r => io.observe(r));
-  }
+  const io = new IntersectionObserver((e) => {
+    e.forEach(en => { if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)} });
+  }, {threshold:0.08});
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 </script>
 </body>
 </html>

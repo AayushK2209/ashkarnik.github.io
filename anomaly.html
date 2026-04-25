@@ -5,91 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anomaly Detection — Ash Karnik</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+  :root{--white:#FFFFFF;--off-white:#FAF8F8;--salmon:#FF5D5D;--red:#D62828;--red-dark:#A81F1F;--peach:#FFD6A5;--ink:#111111;--ink-head:#1C1C1C;--ink-sub:#444444;--ink-muted:#777777;--border:#E5E5E5;--border-light:#F0F0F0;--f-head:'Cormorant Garamond',Georgia,serif;--f-body:'DM Sans',sans-serif;--f-mono:'DM Mono',monospace}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--white);color:var(--ink);font-family:var(--f-body);font-weight:400;line-height:1.7;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 4rem;background:#ffffff;border-bottom:1px solid #E5E5E5;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+  .nav-logo{font-family:var(--f-body);font-size:0.95rem;font-weight:700;color:var(--ink-head);text-decoration:none;transition:color 0.2s}
+  .nav-logo:hover{color:var(--red)}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-family:var(--f-body);font-size:0.875rem;font-weight:500;color:var(--ink-sub);text-decoration:none;transition:color 0.2s;position:relative;padding-bottom:2px}
+  .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--red);transition:width 0.25s}
+  .nav-links a:hover{color:var(--ink-head)}
+  .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+  .nav-links a.active{color:var(--red);font-weight:600}
+  /* PAGE HERO */
+  .page-hero{background:var(--ink-head);padding:6rem 4rem 4rem;position:relative;overflow:hidden}
+  .page-hero::after{content:'';position:absolute;top:0;right:0;width:35%;height:100%;background:linear-gradient(135deg,transparent,rgba(214,40,40,0.07));pointer-events:none}
+  .page-hero-inner{max-width:1100px;margin:0 auto}
+  .back-link{font-family:var(--f-body);font-size:0.82rem;font-weight:500;color:rgba(255,255,255,0.45);text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:2rem;transition:color 0.2s,gap 0.2s}
+  .back-link:hover{color:rgba(255,255,255,0.8);gap:0.8rem}
+  .proj-eyebrow{font-family:var(--f-mono);font-size:0.62rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem}
+  .proj-eyebrow::before{content:'';width:20px;height:1px;background:var(--red);display:inline-block}
+  .page-hero h1{font-family:var(--f-head);font-size:clamp(2.8rem,5.5vw,4.5rem);font-weight:700;line-height:1.0;color:#fff;letter-spacing:-0.025em;margin-bottom:1.5rem}
+  .page-hero h1 em{font-style:italic;color:transparent;-webkit-text-stroke:1.5px var(--red)}
+  .proj-meta{display:flex;gap:2.5rem;flex-wrap:wrap;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,0.1)}
+  .meta-item{display:flex;flex-direction:column;gap:0.25rem}
+  .meta-label{font-family:var(--f-mono);font-size:0.58rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+  .meta-value{font-family:var(--f-body);font-size:0.88rem;font-weight:500;color:rgba(255,255,255,0.7)}
+  /* CONTENT */
+  .proj-content{max-width:780px;margin:0 auto;padding:5rem 4rem}
+  .proj-content h2{font-family:var(--f-head);font-size:1.75rem;font-weight:700;color:var(--ink-head);margin:3rem 0 1rem;letter-spacing:-0.015em}
+  .proj-content h2:first-child{margin-top:0}
+  .proj-content p{font-size:0.97rem;color:var(--ink-sub);line-height:1.9;margin-bottom:1rem}
+  .proj-content ul{margin:0.75rem 0 1.25rem 1.25rem}
+  .proj-content li{font-size:0.93rem;color:var(--ink-sub);line-height:1.75;margin-bottom:0.4rem}
+  .finding-box{border-left:4px solid var(--red);background:var(--off-white);padding:1.5rem 1.75rem;margin:2.5rem 0}
+  .finding-box::before{content:'Key finding';display:block;margin-bottom:0.5rem;font-family:var(--f-mono);font-size:0.6rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--red)}
+  .finding-box p{color:var(--ink-head);font-weight:500;font-size:1rem;margin:0}
+  /* NAV BETWEEN PROJECTS */
+  .proj-nav{display:flex;gap:1rem;padding-top:2.5rem;margin-top:2.5rem;border-top:1px solid var(--border);flex-wrap:wrap}
+  .btn-fill{display:inline-block;padding:0.8rem 2.2rem;background:var(--red);color:var(--white);font-family:var(--f-body);font-size:0.875rem;font-weight:600;text-decoration:none;transition:background 0.2s,transform 0.2s,box-shadow 0.2s}
+  .btn-fill:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(214,40,40,0.3)}
+  .btn-ghost{display:inline-block;padding:0.8rem 2.2rem;border:1.5px solid var(--border);color:var(--ink-sub);font-family:var(--f-body);font-size:0.875rem;font-weight:600;text-decoration:none;transition:border-color 0.2s,color 0.2s,transform 0.2s}
+  .btn-ghost:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
+  footer{background:var(--ink-head);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06)}
+  footer p{font-family:var(--f-mono);font-size:0.62rem;letter-spacing:0.08em;color:rgba(255,255,255,0.25)}
+  .footer-accent{color:var(--peach)}
+  @media(max-width:768px){nav{padding:1rem 1.5rem}.page-hero{padding:5rem 1.5rem 3rem}.proj-content{padding:3rem 1.5rem}footer{flex-direction:column;gap:0.5rem;padding:2rem 1.5rem;text-align:center}}
+</style>
 </head>
 <body>
 
 <nav>
-  <a href="../index.html" class="nav-logo">Ash Karnik ↗ Analytics</a>
+  <a href="../index.html" class="nav-logo">Ash Karnik</a>
   <ul class="nav-links">
     <li><a href="../index.html">Home</a></li>
-    <li><a href="../projects.html">Projects</a></li>
+    <li><a href="../projects.html" class="active">Projects</a></li>
     <li><a href="../about.html">About</a></li>
     <li><a href="../contact.html">Contact</a></li>
   </ul>
 </nav>
 
-<div class="project-detail-header">
-  <a href="../projects.html" class="back-link">← Back to Projects</a>
-  <div style="font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem;">Project 04 · Python · scikit-learn</div>
-  <h1>Operational Anomaly<br>Detection</h1>
-  <div class="project-meta">
-    <div class="meta-item">
-      <span class="meta-label">Methods</span>
-      <span class="meta-value">Isolation Forest · LOF</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Detection rates</span>
-      <span class="meta-value">12% (IF) · 4.5% (LOF)</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Tools</span>
-      <span class="meta-value">Python · scikit-learn · pandas</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Application</span>
-      <span class="meta-value">Revenue leakage · Fraud detection</span>
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <a href="../projects.html" class="back-link">← All Projects</a>
+    <p class="proj-eyebrow">Project 04 · Python · scikit-learn</p>
+    <h1>Operational<br><em>Anomaly Detection</em></h1>
+    <div class="proj-meta">
+      <div class="meta-item"><span class="meta-label">Methods</span><span class="meta-value">Isolation Forest · LOF</span></div>
+        <div class="meta-item"><span class="meta-label">Detection rates</span><span class="meta-value">12% (IF) · 4.5% (LOF)</span></div>
+        <div class="meta-item"><span class="meta-label">Tools</span><span class="meta-value">Python · scikit-learn · pandas</span></div>
+        <div class="meta-item"><span class="meta-label">Application</span><span class="meta-value">Revenue leakage · Fraud detection</span></div>
     </div>
   </div>
 </div>
 
-<div class="project-content">
+<div class="proj-content">
 
-  <h2>The Problem</h2>
-  <p>
-    Revenue leakage and fraud represent a persistent operational risk for businesses managing large transaction volumes. Identifying anomalous patterns in high-dimensional datasets requires methods that go beyond rule-based detection — particularly when fraudulent behaviour adapts to circumvent known thresholds. Unsupervised anomaly detection provides a scalable, adaptive approach that doesn't require labelled fraud examples to function.
-  </p>
+      <h2>The Problem</h2>
+      <p>Revenue leakage and fraud represent a persistent operational risk for businesses managing large transaction volumes. Identifying anomalous patterns in high-dimensional datasets requires methods that go beyond rule-based detection — particularly when fraudulent behaviour adapts to circumvent known thresholds. Unsupervised anomaly detection provides a scalable, adaptive approach that doesn't require labelled fraud examples to function.</p>
+      <h2>Methodology</h2>
+      <p>An anomaly detection pipeline was built using two complementary unsupervised approaches, evaluated in parallel against the same customer dataset:</p>
+      <ul>
+        <li>Isolation Forest: isolates anomalies by recursively partitioning the feature space, flagging observations that require fewer splits to isolate — achieving a 12% anomaly detection rate</li>
+        <li>Local Outlier Factor (LOF): identifies anomalies based on local density deviation relative to neighbours — achieving a 4.5% detection rate, reflecting higher specificity</li>
+      </ul>
+      <p>Business-relevant indicators were engineered to improve interpretability of flagged cases, translating model outputs into operational language for customer support and revenue assurance teams.</p>
+      <div class="finding-box"><p>Running both methods in parallel surfaces two distinct anomaly populations: high-volume outliers (Isolation Forest) and localised density anomalies (LOF) — together providing broader coverage than either method alone.</p></div>
+      <h2>Commercial Implications</h2>
+      <p>For a revenue assurance or fraud operations team, this pipeline provides an automated first-pass triage layer — surfacing the highest-risk transactions for human review rather than requiring manual inspection of entire datasets. The interpretability layer ensures flagged cases can be acted on without requiring the reviewing analyst to understand the underlying model mechanics.</p>
 
-  <h2>Methodology</h2>
-  <p>
-    An anomaly detection pipeline was built using two complementary unsupervised approaches, evaluated in parallel against the same customer dataset:
-  </p>
-  <ul>
-    <li>Isolation Forest: isolates anomalies by recursively partitioning the feature space, flagging observations that require fewer splits to isolate — achieving a 12% anomaly detection rate</li>
-    <li>Local Outlier Factor (LOF): identifies anomalies based on local density deviation relative to neighbours — achieving a 4.5% detection rate, reflecting higher specificity</li>
-  </ul>
-  <p>
-    Business-relevant indicators were engineered to improve interpretability of flagged cases, translating model outputs into operational language for customer support and revenue assurance teams.
-  </p>
-
-  <div class="finding-box">
-    <p>Running both methods in parallel surfaces two distinct anomaly populations: high-volume outliers (captured by Isolation Forest) and localised density anomalies (captured by LOF) — together providing broader coverage than either method alone.</p>
-  </div>
-
-  <h2>Commercial Implications</h2>
-  <p>
-    For a revenue assurance or fraud operations team, this pipeline provides an automated first-pass triage layer — surfacing the highest-risk transactions for human review rather than requiring manual inspection of entire datasets. The interpretability layer (business-relevant indicators) ensures flagged cases can be acted on without requiring the reviewing analyst to understand the underlying model mechanics.
-  </p>
-
-  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; gap: 1rem;">
-    <a href="commercial.html" class="btn-fill">Next Project →</a>
+  <div class="proj-nav">
+    <a href="efficiency.html" class="btn-ghost">← Delay Analysis</a>
     <a href="../projects.html" class="btn-ghost">All Projects</a>
+    <a href="commercial.html" class="btn-fill">Commercial Analysis →</a>
   </div>
-
 </div>
 
 <footer>
   <p>Ash Karnik · Aviation Analytics · Sydney, NSW</p>
-  <p>aayushk16@outlook.com</p>
+  <p><span class="footer-accent">aayushk16@outlook.com</span></p>
 </footer>
-
-<script src="../js/nav.js"></script>
-<script>
-  const io = new IntersectionObserver((e) => {
-    e.forEach(en => { if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)} });
-  }, {threshold:0.08});
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
 </body>
 </html>

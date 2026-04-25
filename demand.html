@@ -5,99 +5,113 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Aviation Demand Dashboard — Ash Karnik</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+  :root{--white:#FFFFFF;--off-white:#FAF8F8;--salmon:#FF5D5D;--red:#D62828;--red-dark:#A81F1F;--peach:#FFD6A5;--ink:#111111;--ink-head:#1C1C1C;--ink-sub:#444444;--ink-muted:#777777;--border:#E5E5E5;--border-light:#F0F0F0;--f-head:'Cormorant Garamond',Georgia,serif;--f-body:'DM Sans',sans-serif;--f-mono:'DM Mono',monospace}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--white);color:var(--ink);font-family:var(--f-body);font-weight:400;line-height:1.7;overflow-x:hidden}
+  nav{position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 4rem;background:#ffffff;border-bottom:1px solid #E5E5E5;box-shadow:0 2px 12px rgba(0,0,0,0.06)}
+  .nav-logo{font-family:var(--f-body);font-size:0.95rem;font-weight:700;color:var(--ink-head);text-decoration:none;transition:color 0.2s}
+  .nav-logo:hover{color:var(--red)}
+  .nav-links{display:flex;gap:2rem;list-style:none}
+  .nav-links a{font-family:var(--f-body);font-size:0.875rem;font-weight:500;color:var(--ink-sub);text-decoration:none;transition:color 0.2s;position:relative;padding-bottom:2px}
+  .nav-links a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:2px;background:var(--red);transition:width 0.25s}
+  .nav-links a:hover{color:var(--ink-head)}
+  .nav-links a:hover::after,.nav-links a.active::after{width:100%}
+  .nav-links a.active{color:var(--red);font-weight:600}
+  /* PAGE HERO */
+  .page-hero{background:var(--ink-head);padding:6rem 4rem 4rem;position:relative;overflow:hidden}
+  .page-hero::after{content:'';position:absolute;top:0;right:0;width:35%;height:100%;background:linear-gradient(135deg,transparent,rgba(214,40,40,0.07));pointer-events:none}
+  .page-hero-inner{max-width:1100px;margin:0 auto}
+  .back-link{font-family:var(--f-body);font-size:0.82rem;font-weight:500;color:rgba(255,255,255,0.45);text-decoration:none;display:inline-flex;align-items:center;gap:0.5rem;margin-bottom:2rem;transition:color 0.2s,gap 0.2s}
+  .back-link:hover{color:rgba(255,255,255,0.8);gap:0.8rem}
+  .proj-eyebrow{font-family:var(--f-mono);font-size:0.62rem;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--red);margin-bottom:1rem;display:flex;align-items:center;gap:0.75rem}
+  .proj-eyebrow::before{content:'';width:20px;height:1px;background:var(--red);display:inline-block}
+  .page-hero h1{font-family:var(--f-head);font-size:clamp(2.8rem,5.5vw,4.5rem);font-weight:700;line-height:1.0;color:#fff;letter-spacing:-0.025em;margin-bottom:1.5rem}
+  .page-hero h1 em{font-style:italic;color:transparent;-webkit-text-stroke:1.5px var(--red)}
+  .proj-meta{display:flex;gap:2.5rem;flex-wrap:wrap;padding-top:1.75rem;border-top:1px solid rgba(255,255,255,0.1)}
+  .meta-item{display:flex;flex-direction:column;gap:0.25rem}
+  .meta-label{font-family:var(--f-mono);font-size:0.58rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:rgba(255,255,255,0.3)}
+  .meta-value{font-family:var(--f-body);font-size:0.88rem;font-weight:500;color:rgba(255,255,255,0.7)}
+  /* CONTENT */
+  .proj-content{max-width:780px;margin:0 auto;padding:5rem 4rem}
+  .proj-content h2{font-family:var(--f-head);font-size:1.75rem;font-weight:700;color:var(--ink-head);margin:3rem 0 1rem;letter-spacing:-0.015em}
+  .proj-content h2:first-child{margin-top:0}
+  .proj-content p{font-size:0.97rem;color:var(--ink-sub);line-height:1.9;margin-bottom:1rem}
+  .proj-content ul{margin:0.75rem 0 1.25rem 1.25rem}
+  .proj-content li{font-size:0.93rem;color:var(--ink-sub);line-height:1.75;margin-bottom:0.4rem}
+  .finding-box{border-left:4px solid var(--red);background:var(--off-white);padding:1.5rem 1.75rem;margin:2.5rem 0}
+  .finding-box::before{content:'Key finding';display:block;margin-bottom:0.5rem;font-family:var(--f-mono);font-size:0.6rem;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--red)}
+  .finding-box p{color:var(--ink-head);font-weight:500;font-size:1rem;margin:0}
+  /* NAV BETWEEN PROJECTS */
+  .proj-nav{display:flex;gap:1rem;padding-top:2.5rem;margin-top:2.5rem;border-top:1px solid var(--border);flex-wrap:wrap}
+  .btn-fill{display:inline-block;padding:0.8rem 2.2rem;background:var(--red);color:var(--white);font-family:var(--f-body);font-size:0.875rem;font-weight:600;text-decoration:none;transition:background 0.2s,transform 0.2s,box-shadow 0.2s}
+  .btn-fill:hover{background:var(--red-dark);transform:translateY(-2px);box-shadow:0 8px 28px rgba(214,40,40,0.3)}
+  .btn-ghost{display:inline-block;padding:0.8rem 2.2rem;border:1.5px solid var(--border);color:var(--ink-sub);font-family:var(--f-body);font-size:0.875rem;font-weight:600;text-decoration:none;transition:border-color 0.2s,color 0.2s,transform 0.2s}
+  .btn-ghost:hover{border-color:var(--red);color:var(--red);transform:translateY(-2px)}
+  footer{background:var(--ink-head);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center;border-top:1px solid rgba(255,255,255,0.06)}
+  footer p{font-family:var(--f-mono);font-size:0.62rem;letter-spacing:0.08em;color:rgba(255,255,255,0.25)}
+  .footer-accent{color:var(--peach)}
+  @media(max-width:768px){nav{padding:1rem 1.5rem}.page-hero{padding:5rem 1.5rem 3rem}.proj-content{padding:3rem 1.5rem}footer{flex-direction:column;gap:0.5rem;padding:2rem 1.5rem;text-align:center}}
+</style>
 </head>
 <body>
 
 <nav>
-  <a href="../index.html" class="nav-logo">Ash Karnik ↗ Analytics</a>
+  <a href="../index.html" class="nav-logo">Ash Karnik</a>
   <ul class="nav-links">
     <li><a href="../index.html">Home</a></li>
-    <li><a href="../projects.html">Projects</a></li>
+    <li><a href="../projects.html" class="active">Projects</a></li>
     <li><a href="../about.html">About</a></li>
     <li><a href="../contact.html">Contact</a></li>
   </ul>
 </nav>
 
-<div class="project-detail-header">
-  <a href="../projects.html" class="back-link">← Back to Projects</a>
-  <div style="font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.75rem;">Project 02 · BITRE · Power BI · Tableau</div>
-  <h1>Australian Domestic Aviation<br>Demand Dashboard</h1>
-  <div class="project-meta">
-    <div class="meta-item">
-      <span class="meta-label">Dataset</span>
-      <span class="meta-value">BITRE Domestic Aviation Activity</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Status</span>
-      <span class="meta-value">In progress · GitHub</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Tools</span>
-      <span class="meta-value">Power BI · Tableau · Python</span>
-    </div>
-    <div class="meta-item">
-      <span class="meta-label">Focus</span>
-      <span class="meta-value">Route trends · COVID recovery</span>
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <a href="../projects.html" class="back-link">← All Projects</a>
+    <p class="proj-eyebrow">Project 02 · BITRE · Power BI · Tableau</p>
+    <h1>Australian Aviation<br><em>Demand Dashboard</em></h1>
+    <div class="proj-meta">
+      <div class="meta-item"><span class="meta-label">Dataset</span><span class="meta-value">BITRE Domestic Aviation Activity</span></div>
+        <div class="meta-item"><span class="meta-label">Status</span><span class="meta-value">In progress · GitHub</span></div>
+        <div class="meta-item"><span class="meta-label">Tools</span><span class="meta-value">Power BI · Tableau · Python</span></div>
+        <div class="meta-item"><span class="meta-label">Focus</span><span class="meta-value">Route trends · COVID recovery</span></div>
     </div>
   </div>
 </div>
 
-<div class="project-content">
+<div class="proj-content">
 
-  <h2>The Problem</h2>
-  <p>
-    Understanding where passenger demand has recovered — and where it hasn't — is a foundational question for any airline commercial team. The COVID-19 pandemic created a structural break in aviation demand patterns, making historical trend analysis both more complex and more important. Route-level visibility into passenger volumes, load factors, and frequency changes allows commercial teams to make informed capacity, pricing, and scheduling decisions.
-  </p>
-  <p>
-    This project builds a route-level demand dashboard using BITRE's Domestic Aviation Activity data, designed to deliver regular performance insight to a commercial stakeholder audience.
-  </p>
+      <h2>The Problem</h2>
+      <p>Understanding where passenger demand has recovered — and where it hasn't — is a foundational question for any airline commercial team. The COVID-19 pandemic created a structural break in aviation demand patterns, making historical trend analysis both more complex and more important. Route-level visibility into passenger volumes, load factors, and frequency changes allows commercial teams to make informed capacity, pricing, and scheduling decisions.</p>
+      <p>This project builds a route-level demand dashboard using BITRE's Domestic Aviation Activity data, designed to deliver regular performance insight to a commercial stakeholder audience.</p>
+      <h2>Data & Methodology</h2>
+      <p>BITRE publishes monthly domestic aviation statistics at the route and carrier level, covering passengers carried, available seats, load factor, and aircraft movements. The dashboard ingests and transforms this data in Python before rendering stakeholder-facing views in Power BI and Tableau.</p>
+      <ul>
+        <li>Python pipeline for data ingestion, cleaning, and metric calculation</li>
+        <li>Route-level load factor trends from 2019 through current period</li>
+        <li>Carrier comparison across Qantas, Virgin Australia, Jetstar, and Rex</li>
+        <li>COVID recovery index: current quarter vs 2019 equivalent baseline</li>
+        <li>Frequency and capacity trends by market segment (trunk, leisure, regional)</li>
+      </ul>
+      <div class="finding-box"><p>Leisure routes (particularly Gold Coast and Cairns) recovered passenger volume faster than trunk business corridors, but at structurally lower average fares — revealing a yield-volume trade-off that persists into 2024.</p></div>
+      <h2>Dashboard Design</h2>
+      <p>The dashboard is structured for two audiences: a summary view for senior commercial stakeholders (headline recovery metrics, route heat map, carrier share trend) and a drill-down view for analysts (route-level time series, load factor decomposition, frequency calendar). Both views are designed for regular refresh cadence as new BITRE data is published quarterly.</p>
+      <h2>Commercial Implications</h2>
+      <p>For a commercial performance or network planning team, this dashboard surfaces the routes where recovery is lagging (capacity restoration ahead of demand) and those where demand is outpacing current capacity — the latter representing potential yield optimisation opportunities. The framework is directly applicable to a Commercial Performance Analyst or Flight Analyst reporting function.</p>
 
-  <h2>Data & Methodology</h2>
-  <p>
-    BITRE publishes monthly domestic aviation statistics at the route and carrier level, covering passengers carried, available seats, load factor, and aircraft movements. The dashboard ingests and transforms this data in Python before rendering stakeholder-facing views in Power BI and Tableau.
-  </p>
-  <ul>
-    <li>Python pipeline for data ingestion, cleaning, and metric calculation</li>
-    <li>Route-level load factor trends from 2019 through current period</li>
-    <li>Carrier comparison across Qantas, Virgin Australia, Jetstar, and Rex</li>
-    <li>COVID recovery index: current quarter vs 2019 equivalent baseline</li>
-    <li>Frequency and capacity trends by market segment (trunk, leisure, regional)</li>
-  </ul>
-
-  <div class="finding-box">
-    <p>Leisure routes (particularly Gold Coast and Cairns) recovered passenger volume faster than trunk business corridors, but at structurally lower average fares — revealing a yield-volume trade-off that persists into 2024.</p>
-  </div>
-
-  <h2>Dashboard Design</h2>
-  <p>
-    The dashboard is structured for two audiences: a summary view for senior commercial stakeholders (headline recovery metrics, route heat map, carrier share trend) and a drill-down view for analysts (route-level time series, load factor decomposition, frequency calendar). Both views are designed for regular refresh cadence as new BITRE data is published quarterly.
-  </p>
-
-  <h2>Commercial Implications</h2>
-  <p>
-    For a commercial performance or network planning team, this dashboard surfaces the routes where recovery is lagging (capacity restoration ahead of demand) and those where demand is outpacing current capacity — the latter representing potential yield optimisation opportunities. The framework is directly applicable to a Commercial Performance Analyst or Flight Analyst reporting function.
-  </p>
-
-  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border); display: flex; gap: 1rem;">
-    <a href="efficiency.html" class="btn-fill">Next Project →</a>
+  <div class="proj-nav">
+    <a href="airfare.html" class="btn-ghost">← Fare Pricing Model</a>
     <a href="../projects.html" class="btn-ghost">All Projects</a>
+    <a href="efficiency.html" class="btn-fill">Delay Analysis →</a>
   </div>
-
 </div>
 
 <footer>
   <p>Ash Karnik · Aviation Analytics · Sydney, NSW</p>
-  <p>aayushk16@outlook.com</p>
+  <p><span class="footer-accent">aayushk16@outlook.com</span></p>
 </footer>
-
-<script src="../js/nav.js"></script>
-<script>
-  const io = new IntersectionObserver((e) => {
-    e.forEach(en => { if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)} });
-  }, {threshold:0.08});
-  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-</script>
 </body>
 </html>

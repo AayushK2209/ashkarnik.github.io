@@ -3,63 +3,505 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact — Ash Karnik Aviation Analytics</title>
+  <title>Contact — Ash Karnik</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+
+    /* ── PAGE HERO BAND ── */
+    .contact-hero {
+      background: var(--ink-head);
+      padding: 7rem 4rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 40%; height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(214,40,40,0.08) 100%);
+      pointer-events: none;
+    }
+    .contact-hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+    }
+    .contact-eyebrow {
+      font-family: var(--f-mono);
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .contact-eyebrow::before {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--red);
+      display: inline-block;
+    }
+    .contact-hero h1 {
+      font-family: var(--f-head);
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.0;
+      color: #ffffff;
+      letter-spacing: -0.025em;
+      margin-bottom: 1.5rem;
+    }
+    .contact-hero h1 em {
+      font-style: italic;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--red);
+    }
+    .contact-hero-sub {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.8;
+      max-width: 420px;
+    }
+
+    /* ── STATUS PILL ── */
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.5rem 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .status-dot {
+      width: 7px; height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink {
+      0%,100% { opacity: 1; }
+      50%      { opacity: 0.3; }
+    }
+    .status-text {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* Quick-info cards on the right of hero */
+    .hero-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      align-self: center;
+    }
+    .hero-card {
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255,255,255,0.03);
+      text-decoration: none;
+      transition: background 0.2s;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .hero-card:last-child { border-bottom: none; }
+    .hero-card:hover { background: rgba(214,40,40,0.08); }
+    .hero-card-icon {
+      width: 36px; height: 36px;
+      background: rgba(214,40,40,0.15);
+      border: 1px solid rgba(214,40,40,0.25);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 15px;
+    }
+    .hero-card-label {
+      font-family: var(--f-mono);
+      font-size: 0.58rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.2rem;
+    }
+    .hero-card-value {
+      font-family: var(--f-body);
+      font-size: 0.88rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ── MAIN CONTENT ── */
+    .contact-body {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 5rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    /* Left col — info */
+    .contact-left h2 {
+      font-family: var(--f-head);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--ink-head);
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+    .contact-left > p {
+      font-size: 0.97rem;
+      color: var(--ink-sub);
+      line-height: 1.85;
+      margin-bottom: 2.5rem;
+    }
+
+    /* Role tags */
+    .role-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2.5rem;
+    }
+    .role-tag {
+      font-family: var(--f-mono);
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.85rem;
+      border: 1px solid var(--border);
+      color: var(--ink-sub);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .role-tag:hover {
+      border-color: var(--red);
+      color: var(--red);
+      background: #FFF5F5;
+    }
+
+    /* Contact links */
+    .contact-links { display: flex; flex-direction: column; }
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: padding-left 0.22s, color 0.2s;
+    }
+    .contact-link:first-child { border-top: 1px solid var(--border); }
+    .contact-link:hover { padding-left: 0.5rem; }
+    .contact-link:hover .cl-value { color: var(--red); }
+    .cl-icon {
+      width: 32px; height: 32px;
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 14px;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .contact-link:hover .cl-icon {
+      background: #FFF5F5;
+      border-color: rgba(214,40,40,0.3);
+    }
+    .cl-label {
+      font-family: var(--f-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      display: block;
+      margin-bottom: 0.15rem;
+    }
+    .cl-value {
+      font-size: 0.9rem;
+      color: var(--ink-sub);
+      font-weight: 400;
+      transition: color 0.2s;
+    }
+
+    /* Location card */
+    .location-card {
+      margin-top: 2rem;
+      padding: 1.25rem;
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--red);
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .location-card-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .location-label {
+      font-family: var(--f-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.25rem;
+    }
+    .location-value {
+      font-size: 0.92rem;
+      color: var(--ink-sub);
+      line-height: 1.6;
+    }
+    .location-value strong { color: var(--ink-head); font-weight: 600; }
+
+    /* ── FORM ── */
+    .contact-form-wrap {
+      background: var(--off-white);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+    }
+    .form-heading {
+      font-family: var(--f-head);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--ink-head);
+      letter-spacing: -0.015em;
+      margin-bottom: 0.4rem;
+    }
+    .form-subheading {
+      font-size: 0.88rem;
+      color: var(--ink-muted);
+      margin-bottom: 2rem;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 1.1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-family: var(--f-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--ink-head);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      color: var(--ink);
+      font-family: var(--f-body);
+      font-size: 0.93rem;
+      font-weight: 400;
+      padding: 0.75rem 1rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      resize: vertical;
+      appearance: none;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--red);
+      box-shadow: 0 0 0 3px rgba(214,40,40,0.08);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #bbb; }
+    .form-group textarea { min-height: 130px; }
+    .form-group select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23777' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; }
+
+    .form-submit-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .form-note {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+      flex: 1;
+    }
+    #form-success {
+      display: none;
+      background: #EAF3DE;
+      border: 1px solid #C0DD97;
+      border-left: 3px solid #3B6D11;
+      padding: 1rem 1.25rem;
+      margin-top: 1rem;
+    }
+    #form-success p {
+      font-size: 0.9rem;
+      color: #27500A;
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink-head);
+      padding: 2.5rem 4rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer p {
+      font-family: var(--f-mono);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.25);
+    }
+    .footer-accent { color: #FFD6A5; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .contact-hero { padding: 6rem 1.5rem 3rem; }
+      .contact-hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-body { grid-template-columns: 1fr; gap: 3rem; padding: 3rem 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; padding: 2rem 1.5rem; text-align: center; }
+    }
+  </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">Ash Karnik ↗ Analytics</a>
+  <a href="index.html" class="nav-logo">Ash Karnik</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="projects.html">Projects</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
 </nav>
 
-<main class="page">
+<!-- HERO BAND -->
+<section class="contact-hero">
+  <div class="contact-hero-inner">
 
-  <section class="section reveal" style="padding-top: 8rem;">
-    <div class="section-header">
-      <span class="section-num">Contact</span>
-      <h2 class="section-title">Let's talk<br><em style="font-family: var(--font-display); font-style: italic; color: var(--amber);">aviation data.</em></h2>
+    <div>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span class="status-text">Open to opportunities</span>
+      </div>
+      <p class="contact-eyebrow">Get in touch</p>
+      <h1>Let's talk<br><em>aviation</em><br>data.</h1>
+      <p class="contact-hero-sub">
+        Actively targeting analyst roles in the Australian aviation sector. Whether it's a role, a collaboration, or just a data conversation — I'm keen to connect.
+      </p>
     </div>
 
-    <div class="contact-grid">
-
-      <div class="contact-info">
-        <h2>Open to opportunities</h2>
-        <p>
-          I'm actively targeting data analyst, flight analyst, and commercial performance analyst roles in the Australian aviation sector. If you're working in the industry or want to discuss the work — reach out.
-        </p>
-
-        <a href="mailto:aayushk16@outlook.com" class="contact-link">
-          <span>Email</span>
-          aayushk16@outlook.com
-        </a>
-        <a href="tel:+61492980708" class="contact-link">
-          <span>Phone</span>
-          0492 980 708
-        </a>
-        <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
-          <span>LinkedIn</span>
-          linkedin.com/in/yourprofile
-        </a>
-        <a href="https://github.com/yourusername" target="_blank" class="contact-link">
-          <span>GitHub</span>
-          github.com/yourusername
-        </a>
-
-        <div style="margin-top: 2rem; padding: 1.25rem; border: 1px solid var(--border);">
-          <p style="font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--amber); margin-bottom: 0.4rem;">Based in</p>
-          <p style="font-size: 0.88rem; color: var(--white-dim);">Sydney, NSW 2138, Australia</p>
+    <div class="hero-cards">
+      <a href="mailto:aayushk16@outlook.com" class="hero-card">
+        <div class="hero-card-icon">✉</div>
+        <div>
+          <p class="hero-card-label">Email</p>
+          <p class="hero-card-value">aayushk16@outlook.com</p>
         </div>
-      </div>
+      </a>
+      <a href="tel:+61492980708" class="hero-card">
+        <div class="hero-card-icon">☎</div>
+        <div>
+          <p class="hero-card-label">Phone</p>
+          <p class="hero-card-value">0492 980 708</p>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/aayush-karnik-743142210/" target="_blank" class="hero-card">
+        <div class="hero-card-icon">in</div>
+        <div>
+          <p class="hero-card-label">LinkedIn</p>
+          <p class="hero-card-value">linkedin.com/in/aayush-karnik-743142210</p>
+        </div>
+      </a>
+      <a href="https://github.com/yourusername" target="_blank" class="hero-card">
+        <div class="hero-card-icon">⌥</div>
+        <div>
+          <p class="hero-card-label">GitHub</p>
+          <p class="hero-card-value">github.com/yourusername</p>
+        </div>
+      </a>
+    </div>
 
-      <form class="contact-form" onsubmit="handleSubmit(event)">
+  </div>
+</section>
+
+<!-- MAIN BODY -->
+<div class="contact-body">
+
+  <!-- LEFT: INFO -->
+  <div class="contact-left">
+    <h2>What I'm looking for</h2>
+    <p>
+      I'm a Master of Business Analytics graduate from UTS building a career in commercial aviation analytics. I'm particularly interested in roles where data directly informs route strategy, pricing, capacity planning, or operational performance.
+    </p>
+
+    <div class="role-tags">
+      <span class="role-tag">Data Analyst</span>
+      <span class="role-tag">Flight Analyst</span>
+      <span class="role-tag">Commercial Performance</span>
+      <span class="role-tag">Revenue Analytics</span>
+      <span class="role-tag">Network Planning</span>
+    </div>
+
+    <div class="contact-links">
+      <a href="mailto:aayushk16@outlook.com" class="contact-link">
+        <div class="cl-icon">✉</div>
+        <div>
+          <span class="cl-label">Email</span>
+          <span class="cl-value">aayushk16@outlook.com</span>
+        </div>
+      </a>
+      <a href="tel:+61492980708" class="contact-link">
+        <div class="cl-icon">☎</div>
+        <div>
+          <span class="cl-label">Phone</span>
+          <span class="cl-value">0492 980 708</span>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/aayush-karnik-743142210/" target="_blank" class="contact-link">
+        <div class="cl-icon">in</div>
+        <div>
+          <span class="cl-label">LinkedIn</span>
+          <span class="cl-value">linkedin.com/in/aayush-karnik-743142210</span>
+        </div>
+      </a>
+      <a href="https://github.com/yourusername" target="_blank" class="contact-link">
+        <div class="cl-icon">⌥</div>
+        <div>
+          <span class="cl-label">GitHub</span>
+          <span class="cl-value">github.com/yourusername</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="location-card">
+      <div class="location-card-icon">◎</div>
+      <div>
+        <p class="location-label">Based in</p>
+        <p class="location-value"><strong>Sydney, NSW</strong> · Australia<br>Available for hybrid and on-site roles</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: FORM -->
+  <div class="contact-form-wrap">
+    <h3 class="form-heading">Send a message</h3>
+    <p class="form-subheading">I typically respond within 24 hours.</p>
+
+    <form class="contact-form" onsubmit="handleSubmit(event)" novalidate>
+      <div class="form-row">
         <div class="form-group">
           <label for="name">Your name</label>
           <input type="text" id="name" name="name" placeholder="Jane Smith" required>
@@ -68,43 +510,56 @@
           <label for="email">Email address</label>
           <input type="email" id="email" name="email" placeholder="jane@airline.com" required>
         </div>
-        <div class="form-group">
-          <label for="subject">Subject</label>
-          <input type="text" id="subject" name="subject" placeholder="Analyst role / collaboration / other">
-        </div>
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell me what you're working on..." required></textarea>
-        </div>
-        <button type="submit" class="btn-fill" style="align-self: flex-start;">Send Message</button>
-        <p id="form-msg" style="display:none; font-family: var(--font-mono); font-size: 0.72rem; color: var(--amber); margin-top: 0.5rem;"></p>
-      </form>
+      </div>
 
-    </div>
-  </section>
+      <div class="form-group">
+        <label for="org">Organisation</label>
+        <input type="text" id="org" name="org" placeholder="Virgin Australia / Qantas / other">
+      </div>
 
-</main>
+      <div class="form-group">
+        <label for="subject">Reason for contact</label>
+        <select id="subject" name="subject">
+          <option value="" disabled selected>Select a reason</option>
+          <option>Job opportunity</option>
+          <option>Collaboration / project</option>
+          <option>Discuss my portfolio work</option>
+          <option>Industry networking</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Tell me about the role, project, or what you'd like to discuss..." required></textarea>
+      </div>
+
+      <div class="form-submit-row">
+        <p class="form-note">Your details are only used to respond to your message.</p>
+        <button type="submit" class="btn-fill">Send Message</button>
+      </div>
+
+      <div id="form-success">
+        <p>Message sent — I'll be in touch within 24 hours.</p>
+      </div>
+    </form>
+  </div>
+
+</div>
 
 <footer>
   <p>Ash Karnik · Aviation Analytics · Sydney, NSW</p>
-  <p>aayushk16@outlook.com</p>
+  <p><span class="footer-accent">aayushk16@outlook.com</span></p>
 </footer>
 
-<script src="../js/nav.js"></script>
-<script>
-  const reveals = document.querySelectorAll(".reveal");
-  if (reveals.length) {
-    const io = new IntersectionObserver((e) => { e.forEach(en => { if (en.isIntersecting) { en.target.classList.add("visible"); io.unobserve(en.target); } }); }, { threshold: 0.1 });
-    reveals.forEach(r => io.observe(r));
-  }
-</script>
+<script src="js/nav.js"></script>
 <script>
   function handleSubmit(e) {
     e.preventDefault();
-    const msg = document.getElementById('form-msg');
-    msg.style.display = 'block';
-    msg.textContent = "Message sent — I'll be in touch shortly.";
+    const success = document.getElementById('form-success');
+    success.style.display = 'block';
     e.target.reset();
+    success.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 </script>
 </body>
